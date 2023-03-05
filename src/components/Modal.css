@@ -1,0 +1,30 @@
+#modal {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 1);
+	position: fixed;
+	top: 0;
+	left: 0;
+	font-size: 24px;
+}
+#modal div:nth-child(1) {
+	color: white;
+	width: 80%;
+	margin: 50px auto;
+	border: 1px solid #333;
+	border-radius: 5px;
+	padding: 30px;
+
+}
+#modal div .button-div {
+	display: flex;
+	justify-content: flex-end;
+}
+#modal div .button-div button {
+	font-size:18px;
+	border-radius: 5px;
+	padding: 10px 20px;
+	border: none;
+	margin: 0 10px;
+	cursor: pointer;
+}

@@ -1,0 +1,12 @@
+#meditation-chart {
+	width: 80%;
+	margin: 20px auto;
+}
+#meditation-chart thead tr th {
+	border-bottom: 2px solid black;
+}
+#meditation-chart tbody tr#entry td {
+	cursor: pointer;
+	background-color: grey;
+	min-height: 18px;
+}

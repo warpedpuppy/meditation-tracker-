@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
-
+import MeditationChart from './components/MediationChart';
+import Modal from './components/Modal';
+import TokenService from './services/TokenService';
 function App() {
+ 
+  const [ showModal, setShowModal ] = useState(true)
+  
+  useEffect(() => {
+
+	if (TokenService.checkForToken()) {
+		setShowModal(false);
+	}
+
+  }, [])
+  function start () {
+	setShowModal(false)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+		<MeditationChart />
+		{ showModal && <Modal start={start} /> }
     </div>
   );
 }

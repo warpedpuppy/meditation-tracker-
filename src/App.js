@@ -15,7 +15,8 @@ function App() {
 
   }, [])
   function start () {
-	setShowModal(false)
+	TokenService.createToken();
+	setShowModal(false);
   }
   return (
     <div className="App">

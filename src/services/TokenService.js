@@ -1,3 +1,4 @@
+import DateService from "./DateService";
 const TokenService = {
 	tokenName: 'token',
 	checkForToken: function () {
@@ -7,7 +8,7 @@ const TokenService = {
 		let token = JSON.parse(localStorage.getItem('token'));
 		let dates = [...token.dates].sort( (a, b) => new Date(a.date).getTime() -new Date(b.date).getTime());
 		token.dates = dates;
-		return token
+		return token ? token : undefined;
 	},
 	setToken: function (item) {
 		localStorage.setItem('token', JSON.stringify(item))
@@ -23,7 +24,7 @@ const TokenService = {
 		let recordExists = false;
 		for (let i = 0; i < temp.dates.length; i++){
 			let item = temp.dates[i];
-			if (item.date && this.sameDay(date, item.date)) {
+			if (item.date && DateService.sameDay(date, item.date)) {
 				item.sessions[q] = 1;
 				recordExists = true;
 				break;
@@ -48,7 +49,7 @@ const TokenService = {
 			let dayInSeconds = dayInMinutes * 60;
 			let millisecondsInADay = 1000 * dayInSeconds;
 			let previousDay = new Date(today.getTime() - (millisecondsInADay * countdown));
-			let bool = token.dates.find( item => this.sameDay(new Date(item.date), previousDay) );
+			let bool = token.dates.find( item => DateService.sameDay(new Date(item.date), previousDay) );
 			if (!bool) {
 				token.dates.push({sessions:[1,1], date: previousDay})
 			}
@@ -63,9 +64,8 @@ const TokenService = {
 		token.dates = newDates;
 		this.setToken(token);
 	},
-	sameDay: function (day1, day2) {
-		let day2DateObject = new Date(day2);
-		return (day1.getDate() === day2DateObject.getDate() && day1.getMonth() === day2DateObject.getMonth() && day1.getFullYear() === day2DateObject.getFullYear())
+	clearToken: function () {
+		localStorage.clear();
 	}
 }
 export default TokenService;
